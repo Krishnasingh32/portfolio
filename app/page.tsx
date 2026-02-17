@@ -140,7 +140,7 @@ export default function Portfolio() {
             <form className="max-w-xl mx-auto space-y-4 mb-10">
               <input type="text" placeholder="Your Name" className="w-full p-3 rounded-lg border dark:bg-gray-800" />
               <input type="email" placeholder="Your Email" className="w-full p-3 rounded-lg border dark:bg-gray-800" />
-              <textarea placeholder="Your Message" rows="4" className="w-full p-3 rounded-lg border dark:bg-gray-800"></textarea>
+              <textarea placeholder="Your Message" rows={4} className="w-full p-3 rounded-lg border dark:bg-gray-800"></textarea>
               <button type="submit" className="bg-black text-white px-6 py-3 rounded-xl hover:opacity-80 transition">
                 Send Message
               </button>
