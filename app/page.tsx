@@ -1,16 +1,63 @@
 'use client';
 
+import { TypeAnimation } from "react-type-animation";
+import Particles from "react-tsparticles";
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Linkedin, Moon, Sun, Phone } from 'lucide-react';
 
+
 export default function Portfolio() {
   const [dark, setDark] = useState(false);
+    const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+   const [aiText, setAiText] = useState("");
+
+const generateAI = () => {
+  setAiText("Analyzing business workflow...");
+  setTimeout(() => {
+    setAiText("Optimized workflow generated with 32% efficiency improvement 🚀");
+  }, 2000);
+};
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (res.ok) {
+        alert("Message sent successfully 🚀");
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        alert("Something went wrong ❌");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Server error ❌");
+    }
+  };
+
 
   return (
     <div className={dark ? 'dark' : ''}>
       <div className="min-h-screen transition-all duration-500 bg-gradient-to-br from-gray-100 via-white to-gray-200 dark:from-gray-900 dark:via-gray-800 dark:to-black text-gray-900 dark:text-white">
-
+        <div className="fixed inset-0 -z-10 overflow-hidden">
+  <div className="absolute w-[700px] h-[700px] bg-purple-500/20 rounded-full blur-3xl top-[-200px] left-[-200px] animate-pulse" />
+  <div className="absolute w-[600px] h-[600px] bg-blue-500/20 rounded-full blur-3xl bottom-[-200px] right-[-200px] animate-pulse" />
+</div>
         {/* Animated Background */}
         <div className="fixed inset-0 -z-10 overflow-hidden">
           <motion.div
@@ -24,9 +71,33 @@ export default function Portfolio() {
             className="absolute w-[500px] h-[500px] bg-blue-400/20 rounded-full blur-3xl bottom-[-200px] right-[-200px]"
           />
         </div>
+        <motion.section
+  initial={{ opacity: 0, y: 60 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8 }}
+  viewport={{ once: true }}
+></motion.section>
+<motion.section
+  initial={{ opacity: 0, y: 80 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8 }}
+  viewport={{ once: true }}
+></motion.section>
+<Particles
+  options={{
+    background: { color: "transparent" },
+    particles: {
+      number: { value: 60 },
+      size: { value: 3 },
+      move: { speed: 1 },
+      links: { enable: true, opacity: 0.2 },
+    },
+  }}
+  className="absolute inset-0 -z-10"
+/>
 
         {/* Navbar */}
-        <nav className="fixed top-0 w-full backdrop-blur-md bg-white/70 dark:bg-black/40 shadow-sm z-50">
+        <nav className="fixed top-0 w-full backdrop-blur-xl bg-white/40 dark:bg-black/30 border-b border-gray-200 dark:border-gray-700 z-50">
           <div className="max-w-6xl mx-auto flex justify-between items-center p-4">
             <h1 className="font-bold text-lg">Krishna Kumar Singh</h1>
             <div className="flex items-center gap-6">
@@ -41,29 +112,95 @@ export default function Portfolio() {
         <div className="pt-24 px-6 md:px-12">
 
           {/* Hero Section */}
-          <section className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center py-20">
-            <div>
-              <motion.h1
-                initial={{ opacity: 0, y: -30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                className="text-5xl font-bold mb-6"
-              >
-                AI & Automation Business Analyst
-              </motion.h1>
-              <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
-                Translating business needs into structured AI systems, automation workflows, and scalable technology solutions.
-              </p>
-            </div>
-            <motion.img
-              src="https://images.unsplash.com/photo-1677442136019-21780ecad995"
-              alt="AI"
-              className="rounded-2xl shadow-2xl"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1 }}
-            />
-          </section>
+<section className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center py-24">
+  <div>
+   <motion.h1
+  initial={{ opacity: 0, y: -40 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8 }}
+  className="text-5xl md:text-6xl font-extrabold mb-6 leading-tight bg-gradient-to-r from-purple-600 via-blue-500 to-pink-500 bg-clip-text text-transparent animate-pulse"
+>
+  AI-Powered Business Intelligence Architect
+</motion.h1>
+
+    <p className="text-xl text-blue-600 font-medium mb-4">
+      AI & Automation Business Analyst
+    </p>
+
+    <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
+      Transforming business requirements into scalable AI systems,
+      automation workflows, and structured technical documentation.
+    </p>
+<div className="text-xl font-semibold text-purple-600">
+  <TypeAnimation
+    sequence={[
+      "AI Systems Architect",
+      2000,
+      "Automation Strategist",
+      2000,
+      "Business Intelligence Engineer",
+      2000,
+      "AI Workflow Designer",
+      2000,
+    ]}
+    wrapper="span"
+    speed={50}
+    repeat={Infinity}
+  />
+</div>
+    <div className="flex gap-4">
+      <a
+        href="#contact"
+        className="px-6 py-3 bg-black text-white rounded-xl hover:scale-105 transition"
+      >
+        Hire Me
+      </a>
+
+      <a
+        href="#projects"
+        className="px-6 py-3 border border-gray-400 rounded-xl hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+      >
+        View Projects
+      </a>
+    </div>
+  </div>
+
+  <motion.img
+    src="/krishna.jpg"
+    alt="Krishna Kumar Singh"
+    className="rounded-3xl shadow-2xl w-80 h-80 object-cover mx-auto border-4 border-white dark:border-gray-700"
+    initial={{ opacity: 0, scale: 0.9 }}
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{ duration: 1 }}
+  />
+</section>
+{/* Expertise Section */}
+<section className="max-w-6xl mx-auto py-20 text-center">
+  <h2 className="text-4xl font-bold mb-12">Core Expertise</h2>
+
+  <div className="flex flex-wrap justify-center gap-4">
+    {[
+      "AI Requirement Engineering",
+      "BRD / FRD Documentation",
+      "Automation Strategy",
+      "Prompt Engineering",
+      "API Architecture",
+      "Process Optimization",
+      "CRM Workflow Design",
+      "UAT & Deployment Strategy",
+      "Stakeholder Management",
+      "Business Intelligence"
+    ].map((skill, index) => (
+      <motion.span
+        key={index}
+        whileHover={{ scale: 1.1 }}
+        className="px-6 py-3 rounded-full bg-gradient-to-r from-purple-500/20 to-blue-500/20 border border-gray-300 dark:border-gray-700 text-sm font-medium shadow-md backdrop-blur-md"
+      >
+        {skill}
+      </motion.span>
+    ))}
+  </div>
+</section>
 
           {/* Services */}
           <section className="max-w-6xl mx-auto py-16">
@@ -109,6 +246,49 @@ export default function Portfolio() {
               ))}
             </div>
           </section>
+          <section className="max-w-5xl mx-auto py-24 text-center">
+  <h2 className="text-4xl font-bold mb-10">
+    AI Workflow Simulation
+  </h2>
+
+  <button
+    onClick={generateAI}
+    className="px-8 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-xl shadow-lg hover:scale-105 transition"
+  >
+    Run AI Simulation
+  </button>
+
+  <p className="mt-6 text-lg text-gray-600 dark:text-gray-300">
+    {aiText}
+  </p>
+</section>
+
+{/* Experience Section */}
+<section className="max-w-6xl mx-auto py-24">
+  <h2 className="text-4xl font-bold text-center mb-16">
+    Professional Experience
+  </h2>
+
+  <motion.div
+    whileHover={{ scale: 1.02 }}
+    className="backdrop-blur-lg bg-white/60 dark:bg-gray-800/60 border border-gray-200 dark:border-gray-700 p-10 rounded-3xl shadow-2xl"
+  >
+    <h3 className="text-2xl font-semibold mb-2">
+      Business Analyst – Study India Services
+    </h3>
+    <p className="text-gray-500 mb-6">
+      Student Admission & International Counseling Operations
+    </p>
+
+    <ul className="space-y-4 text-gray-700 dark:text-gray-300">
+      <li>• Created BRD / FRD documentation for admission CRM systems.</li>
+      <li>• Designed lead lifecycle workflows handling 500+ students/month.</li>
+      <li>• Implemented automation logic reducing manual work by 30%.</li>
+      <li>• Conducted stakeholder meetings & requirement elicitation sessions.</li>
+      <li>• Managed UAT planning and structured validation cases.</li>
+    </ul>
+  </motion.div>
+</section>
 
           {/* Impact Metrics */}
           <section className="max-w-5xl mx-auto py-16">
@@ -133,18 +313,166 @@ export default function Portfolio() {
             ))}
           </section>
 
+{/* AI Projects Section */}
+<section id="projects" className="max-w-6xl mx-auto py-24">
+  <h2 className="text-4xl font-bold text-center mb-16">
+    Featured Projects
+  </h2>
+
+  <div className="grid md:grid-cols-2 gap-10">
+
+    <motion.div whileHover={{ y: -10 }}
+      className="bg-gradient-to-br from-purple-500/10 to-blue-500/10 p-8 rounded-3xl border border-gray-200 dark:border-gray-700 shadow-xl">
+      <h3 className="text-2xl font-semibold mb-4">
+        AI Lead Qualification System
+      </h3>
+      <p className="text-gray-600 dark:text-gray-400">
+        Designed intelligent filtering workflows to prioritize high-value
+        student leads using structured qualification logic.
+      </p>
+    </motion.div>
+
+    <motion.div whileHover={{ y: -10 }}
+      className="bg-gradient-to-br from-blue-500/10 to-indigo-500/10 p-8 rounded-3xl border border-gray-200 dark:border-gray-700 shadow-xl">
+      <h3 className="text-2xl font-semibold mb-4">
+        Student Admission CRM Architecture
+      </h3>
+      <p className="text-gray-600 dark:text-gray-400">
+        Structured requirement documentation and system flow for
+        end-to-end admission tracking and conversion analytics.
+      </p>
+    </motion.div>
+
+    <motion.div whileHover={{ y: -10 }}
+      className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 p-8 rounded-3xl border border-gray-200 dark:border-gray-700 shadow-xl">
+      <h3 className="text-2xl font-semibold mb-4">
+        Automation Workflow Mapping
+      </h3>
+      <p className="text-gray-600 dark:text-gray-400">
+        Designed process maps and automation triggers improving
+        operational efficiency and reducing repetitive tasks.
+      </p>
+    </motion.div>
+
+    <motion.div whileHover={{ y: -10 }}
+      className="bg-gradient-to-br from-pink-500/10 to-purple-500/10 p-8 rounded-3xl border border-gray-200 dark:border-gray-700 shadow-xl">
+      <h3 className="text-2xl font-semibold mb-4">
+        UAT & Deployment Framework
+      </h3>
+      <p className="text-gray-600 dark:text-gray-400">
+        Developed structured UAT templates and validation strategy
+        ensuring smooth production releases.
+      </p>
+    </motion.div>
+
+  </div>
+</section>
+{/* Tech Stack */}
+<section className="max-w-6xl mx-auto py-24">
+  <h2 className="text-4xl font-bold text-center mb-16">
+    AI & Technology Stack
+  </h2>
+
+  <div className="grid md:grid-cols-4 gap-8 text-center">
+
+    {[
+      "OpenAI API",
+      "Chatbot Architecture",
+      "Next.js",
+      "React",
+      "Workflow Automation",
+      "REST APIs",
+      "Data Analytics",
+      "System Design"
+    ].map((tech, index) => (
+      <motion.div
+        key={index}
+        whileHover={{ y: -10 }}
+        className="p-8 rounded-3xl bg-white/60 dark:bg-gray-800/60 backdrop-blur-xl shadow-xl border border-gray-200 dark:border-gray-700"
+      >
+        <h3 className="font-semibold text-lg">{tech}</h3>
+      </motion.div>
+    ))}
+
+  </div>
+</section>
+
+{/* Achievements */}
+<section className="max-w-5xl mx-auto py-24 text-center">
+  <h2 className="text-4xl font-bold mb-16">Key Achievements</h2>
+
+  <div className="grid md:grid-cols-3 gap-10">
+
+    <div>
+      <h3 className="text-5xl font-bold text-purple-600">500+</h3>
+      <p className="mt-2 text-gray-600 dark:text-gray-400">
+        Student Leads Managed
+      </p>
+    </div>
+
+    <div>
+      <h3 className="text-5xl font-bold text-blue-600">30%</h3>
+      <p className="mt-2 text-gray-600 dark:text-gray-400">
+        Workflow Efficiency Boost
+      </p>
+    </div>
+
+    <div>
+      <h3 className="text-5xl font-bold text-green-600">95%</h3>
+      <p className="mt-2 text-gray-600 dark:text-gray-400">
+        Client Satisfaction Rate
+      </p>
+    </div>
+
+  </div>
+</section>
+
           {/* Contact Section */}
           <section id="contact" className="max-w-4xl mx-auto py-20 text-center">
             <h2 className="text-3xl font-bold mb-6">Let’s Work Together</h2>
 
-            <form className="max-w-xl mx-auto space-y-4 mb-10">
-              <input type="text" placeholder="Your Name" className="w-full p-3 rounded-lg border dark:bg-gray-800" />
-              <input type="email" placeholder="Your Email" className="w-full p-3 rounded-lg border dark:bg-gray-800" />
-              <textarea placeholder="Your Message" rows={4} className="w-full p-3 rounded-lg border dark:bg-gray-800"></textarea>
-              <button type="submit" className="bg-black text-white px-6 py-3 rounded-xl hover:opacity-80 transition">
-                Send Message
-              </button>
-            </form>
+            <form
+  onSubmit={handleSubmit}
+  className="max-w-xl mx-auto space-y-4 mb-10"
+>
+  <input
+    type="text"
+    name="name"
+    placeholder="Your Name"
+    value={formData.name}
+    onChange={handleChange}
+    required
+    className="w-full p-3 rounded-lg border dark:bg-gray-800"
+  />
+
+  <input
+    type="email"
+    name="email"
+    placeholder="Your Email"
+    value={formData.email}
+    onChange={handleChange}
+    required
+    className="w-full p-3 rounded-lg border dark:bg-gray-800"
+  />
+
+  <textarea
+    name="message"
+    placeholder="Your Message"
+    rows={4}
+    value={formData.message}
+    onChange={handleChange}
+    required
+    className="w-full p-3 rounded-lg border dark:bg-gray-800"
+  />
+
+  <button
+    type="submit"
+    className="w-full bg-black text-white px-6 py-3 rounded-xl hover:opacity-80 transition"
+  >
+    Send Message
+  </button>
+</form>
+
 
             <div className="flex flex-col items-center gap-4">
               <a href="mailto:kishansingh20907@gmail.com" className="flex items-center gap-2 hover:text-purple-600">
@@ -194,5 +522,6 @@ export default function Portfolio() {
 
       </div>
     </div>
+    
   );
 }
