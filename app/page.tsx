@@ -17,10 +17,27 @@ export default function Portfolio() {
    const [aiText, setAiText] = useState("");
 
 const generateAI = () => {
-  setAiText("Analyzing business workflow...");
+  setAiText("Booting neural analysis core...");
+
   setTimeout(() => {
-    setAiText("Optimized workflow generated with 32% efficiency improvement 🚀");
+    setAiText("Mapping workflow graph topology...");
+  }, 1000);
+
+  setTimeout(() => {
+    setAiText("Detecting bottlenecks via heuristic modeling...");
   }, 2000);
+
+  setTimeout(() => {
+    setAiText("Running multi-layer optimization protocol...");
+  }, 3000);
+
+  setTimeout(() => {
+    const improvement = Math.floor(Math.random() * 20) + 30;
+
+    setAiText(
+      `Optimization complete → ${improvement}% efficiency gain achieved 🚀`
+    );
+  }, 4500);
 };
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -112,6 +129,7 @@ const generateAI = () => {
         <div className="pt-24 px-6 md:px-12">
 
           {/* Hero Section */}
+          
 <section className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center py-24">
   <div>
    <motion.h1
@@ -122,7 +140,6 @@ const generateAI = () => {
 >
   AI-Powered Business Intelligence Architect
 </motion.h1>
-
     <p className="text-xl text-blue-600 font-medium mb-4">
       AI & Automation Business Analyst
     </p>
